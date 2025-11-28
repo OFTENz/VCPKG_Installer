@@ -81,22 +81,22 @@ if [ $? -ne 0 ] ; then
 		fi 
 		#rm -rf /home/$USER/.local/bin/unzip /home/$USER/.local/bin/unzip /home/$USER/.local/bin/vcpkg
 		#ln -s $GOINFRE/unzip /home/$USER/.local/bin/unzip ; ln -s $GOINFRE/zip /home/$USER/.local/bin/zip
-		echo "export PATH=$GOINFRE/zip:$GOINFRE/unzip:$GOINFRE/VCPKG:\$PATH" >> $TSHELL
+		echo "export PATH=$GOINFRE/zip:$GOINFRE/unzip:$GOINFRE/vcpkg:\$PATH" >> $TSHELL
 		. $TSHELL
 
 	fi
 
 
 	cd $GOINFRE
-	rm -rf $GOINFRE/VCPKG
+	rm -rf $GOINFRE/vcpkg
 
-	git clone https://github.com/microsoft/vcpkg.git VCPKG
+	git clone https://github.com/microsoft/vcpkg.git vcpkg
 
 	if [ $? -ne 0 ] ; then
 		echo -e "\n[*] Error While Cloning vcpkg.git"; exit 1
 	fi 
 
-    cd VCPKG
+    cd vcpkg
     ./bootstrap-vcpkg.sh
 
 	if [ $? -ne 0 ] ; then
@@ -104,5 +104,8 @@ if [ $? -ne 0 ] ; then
 	
 	else
 		echo -e "\n[*] Success Installing vcpkg !"
+		echo "export CPLUS_INCLUDE_PATH=$GOINFRE/vcpkg/installed/x64-linux/include:$CPLUS_INCLUDE_PATH" >> $TSHELL
+		echo "export LIBRARY_PATH=$GOINFRE/vcpkg/installed/x64-linux/lib:$LIBRARY_PATH" >> $TSHELL
+		echo "export LD_LIBRARY_PATH=$GOINFRE/vcpkg/installed/x64-linux/lib:$LD_LIBRARY_PATH" >> $TSHELL
 	fi
 fi 
