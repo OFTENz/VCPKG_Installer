@@ -107,5 +107,6 @@ if [ $? -ne 0 ] ; then
 		echo "export CPLUS_INCLUDE_PATH=$GOINFRE/vcpkg/installed/x64-linux/include:$CPLUS_INCLUDE_PATH" >> $TSHELL
 		echo "export LIBRARY_PATH=$GOINFRE/vcpkg/installed/x64-linux/lib:$LIBRARY_PATH" >> $TSHELL
 		echo "export LD_LIBRARY_PATH=$GOINFRE/vcpkg/installed/x64-linux/lib:$LD_LIBRARY_PATH" >> $TSHELL
+		. $TSHELL
 	fi
 fi 
